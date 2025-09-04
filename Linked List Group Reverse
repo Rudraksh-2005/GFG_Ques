@@ -1,0 +1,58 @@
+
+class Solution {
+  public:
+  
+    Node *getknode(Node *temp,int k){
+        k--;
+        while(k!=0 && temp!=NULL){
+            k--;
+            temp=temp->next;
+        }
+        
+        return temp;
+    }
+    
+    Node *reverseLinkedlist(Node *temp){
+        Node *curr=NULL;
+        Node *prev=NULL;
+        
+        while(temp!=NULL){
+            curr=temp->next;
+            temp->next=prev;
+            prev=temp;
+            temp=curr;
+        }
+        
+        temp=prev;
+        
+        return temp;
+    }
+    
+    Node *reverseKGroup(Node *head, int k) {
+        // code here
+        Node *temp=head;
+        Node *prevlast=NULL;
+        
+        while(temp!=NULL){
+            Node *kth=getknode(temp,k);
+            if(kth==NULL){
+                if(prevlast) prevlast->next=reverseLinkedlist(temp);
+                break;
+            }
+            
+            Node *nextnode = kth->next;
+            kth->next=NULL;
+            reverseLinkedlist(temp);
+            if(temp==head){
+                head=kth;
+            }
+            else{
+                prevlast->next=kth;
+            }
+            
+            prevlast=temp;
+            temp=nextnode;
+        }
+        return head;
+    }
+};
