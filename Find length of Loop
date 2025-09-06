@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    int lengthOfLoop(Node *head) {
+        // code here
+        int count = 0;
+    Node* slow = head;
+    Node* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+        
+        if (slow == fast) {
+            do {
+                count++;
+                fast = fast->next;
+            } while (slow != fast);
+            
+            return count;
+        }
+    }
+    
+    return 0;
+    }
+};
