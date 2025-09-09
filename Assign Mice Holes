@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    int assignHole(vector<int>& mices, vector<int>& holes) {
+        // code here
+        int n=mices.size();
+        int t=0;
+        sort(mices.begin(),mices.end());
+        sort(holes.begin(),holes.end());
+        
+        int  i=0,j=0;
+        int ans=0;
+        
+        while(i<n && j<n){
+            int a=mices[i];
+            int b=holes[i];
+            t=abs(a-b);
+            ans=max(ans,t);
+            i++;
+            j++;
+        }
+        
+        return ans;
+        
+    }
+};
