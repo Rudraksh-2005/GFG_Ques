@@ -1,0 +1,39 @@
+class Solution {
+  public:
+    int evaluatePostfix(vector<string>& arr) {
+        // code here
+          stack<int>s; 
+      
+      for(auto i: arr){
+          if(isdigit(i[0]) ||  i[0]=='-' && i.size()>1){
+              if(i[0]=='-'){
+                  s.push(0-stoi(i.substr(1)));
+              }else{
+                   s.push(stoi(i)); 
+              }
+             
+          }else{
+              int op2 = s.top(); 
+              s.pop(); 
+              int op1  = s.top(); 
+              s.pop(); 
+              if(i=="+"){
+                  s.push(op1+op2); 
+              }else if(i=="-"){
+                  s.push(op1-op2); 
+                  
+              }else if(i=="*")
+              {
+                  s.push(op1*op2); 
+              }else if(i=="/"){
+                  s.push(floor((double)op1/op2)); 
+              }
+              else if(i=="^"){
+                  s.push(pow(op1,op2));
+              }
+          }
+      }
+      
+      return s.top(); 
+    }
+};
