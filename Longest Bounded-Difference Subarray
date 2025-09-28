@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    vector<int> longestSubarray(vector<int>& arr, int x) {
+           map<int,int> window;
+        int i = 0;
+        
+        int start = 0;
+        int end = 0;
+        int maxLen = 0;
+        for (int j = 0; j < arr.size(); j++) {
+            window[arr[j]]++;
+            
+            while (window.rbegin()->first - window.begin()->first > x) {
+                window[arr[i]]--;
+                if (window[arr[i]] == 0) 
+                    window.erase(arr[i]);
+                i++;
+            }
+            if (j - i + 1 > maxLen) {
+                start = i;
+                end = j;
+                maxLen = j - i + 1;
+            }    
+        }
+        return vector<int>(arr.begin() + start, arr.begin() + end + 1);
+    }
+};
