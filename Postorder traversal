@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    void POSTorder(Node* root, vector<int>&result){
+        if(root==NULL){
+            return;
+        }
+        
+        
+        POSTorder(root->left,result);
+        
+        POSTorder(root->right,result);
+        result.push_back(root->data);
+        
+    }
+    vector<int> postOrder(Node* root) {
+        vector<int>result;
+        POSTorder(root,result);
+        
+        return result;
+     
+    }
+};
