@@ -1,0 +1,41 @@
+class Solution {
+  public:
+    void inor(Node *r, unordered_map<int, int> &store, int &i, vector<int> &data){
+        if(!r)
+          return;
+        inor(r->left, store, i, data);
+        store[r->data] = i++;
+        data.push_back(r->data);
+        inor(r->right, store, i, data);
+        return;
+    }
+    
+    virtual void fun(Node *&root, unordered_map<int, int> &indexBox, vector<int> &prefixSum, int &n){
+        if(!root)
+          return;
+        fun(root->left, indexBox, prefixSum, n);
+        int i = indexBox[root->data];
+        root->data = prefixSum[n-1] - prefixSum[i];
+        fun(root->right, indexBox, prefixSum, n);
+        return;
+    }
+    
+    virtual void transformTree(Node *root) {
+        // code here
+        unordered_map<int, int> indexBox;
+        int i=0;
+        vector<int> data;
+        inor(root, indexBox, i, data);
+        
+        int n = data.size();
+        vector<int> prefixSum(n, 0);
+        
+        prefixSum[0] = data[0];
+        for(int i=1;i<n;i++)
+          prefixSum[i] = prefixSum[i-1] + data[i];
+          
+        fun(root, indexBox, prefixSum, n);  
+        return;  
+        
+    }
+};
