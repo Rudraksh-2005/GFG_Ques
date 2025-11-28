@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    vector<int> subsetXOR(int n) {
+        // code here
+        vector <int> ans(n);
+        iota(ans.begin(), ans.end(), 1);
+        if(n == 1) return ans;
+        
+        if(n % 4 == 1) ans.erase(ans.end()-2);
+        else if(n % 4 == 2) ans.erase(ans.begin());
+        else if(n % 4 == 3) ans.erase(ans.end());
+        
+        return ans;
+    }
+};
