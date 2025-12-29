@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    int kthElement(vector<int> &a, vector<int> &b, int k) {
+        // code here
+            int lenA = a.size();
+            int lenB = b.size();
+            
+            
+            if (lenA > lenB) {
+                return kthElement(b, a, k);
+            }
+            
+            int low = max(0, k - lenB); 
+            int high = min(k, lenA);    
+            
+            while (low <= high) {
+                int partitionA = (low + high) / 2;
+                int partitionB = k - partitionA;
+                
+                int leftA = (partitionA == 0) ? INT_MIN : a[partitionA - 1];
+                int leftB = (partitionB == 0) ? INT_MIN : b[partitionB - 1];
+                
+                int rightA = (partitionA == lenA) ? INT_MAX : a[partitionA];
+                int rightB = (partitionB == lenB) ? INT_MAX : b[partitionB];
+                
+                if (leftA <= rightB && leftB <= rightA) {
+                    return max(leftA, leftB);
+                }
+                else if (leftA > rightB) {
+                    high = partitionA - 1;
+                }
+                else {
+                    low = partitionA + 1;
+                }
+            }
+            return -1;
+    }
+};
