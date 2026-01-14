@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    int catchThieves(vector<char> &arr, int k) {
+        // Code here
+         int n = arr.size();
+    queue<int> police, thieves;
+    int cnt = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == 'P')
+            police.push(i);
+        else if (arr[i] == 'T')
+            thieves.push(i);
+
+        // Pair closest thief and police within distance k
+        while (!police.empty() && !thieves.empty()) {
+            int p = police.front();
+            int t = thieves.front();
+
+            if (abs(p - t) <= k) {
+                cnt++;
+                police.pop();
+                thieves.pop();
+            } else if (t < p) {
+                thieves.pop(); // Thief is too far left
+            } else {
+                police.pop(); // Police is too far left
+            }
+        }
+    }
+
+    return cnt;
+        
+    }
+};
