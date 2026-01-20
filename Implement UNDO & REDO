@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    string word = "";
+    stack<char>recent;
+  public:
+    void append(char x) {
+        word+=x;
+    }
+
+    void undo() {
+        recent.push(word[word.length()-1]);
+        word.erase(word.end()-1);
+    }
+
+    void redo() {
+        char ch = recent.top();
+        recent.pop();
+        word+=ch;
+    }
+
+    string read() {
+        return word;
+    }
+};
