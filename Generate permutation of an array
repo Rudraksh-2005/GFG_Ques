@@ -1,0 +1,23 @@
+class Solution {
+  public:
+  
+    void solve(vector<int>&arr , int n, int i, vector<vector<int>>&ans){
+        if(i==n){
+            ans.push_back(arr);
+            return;
+        }
+        for(int j=i;j<n;j++){
+            swap(arr[i],arr[j]);
+            solve(arr,n,i+1,ans);
+            swap(arr[i],arr[j]);
+        }
+    }
+    vector<vector<int>> permuteDist(vector<int>& arr) {
+        // code here
+        vector<vector<int>>ans;
+        
+        solve(arr,arr.size(),0,ans);
+        
+        return ans;
+    }
+};
