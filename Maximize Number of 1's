@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    int maxOnes(vector<int>& arr, int k) {
+        // code here
+        int l=0;
+        int r=0;
+        int n=arr.size();
+        int zeros=0;
+        int maxi=0;
+        
+        while(r<n){
+            if(arr[r]==0)zeros++;
+            if(zeros<=k){
+                maxi=max(maxi,r-l+1);
+            }
+            if(zeros>k){
+                if(arr[l]==0)zeros--;
+                l++;
+            }
+            r++;
+        }
+        
+        return maxi;
+    }
+};
