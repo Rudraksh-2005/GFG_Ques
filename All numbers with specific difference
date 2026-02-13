@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    bool check(int mid,int d){
+        int a=mid;
+        int sum=0;
+        
+        while(mid!=0){
+            sum+=mid%10;
+            mid=mid/10;
+        }
+        
+        return (a-sum)>=d;
+    }
+    int getCount(int n, int d) {
+        // code here
+        int low=1;
+        int high=n;
+        int ans=0;
+        
+        while(low<=high){
+            int mid=high +(low-high)/2;
+            if(check(mid,d)){
+                ans=n-mid+1;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        
+        return ans;
+    }
+};
