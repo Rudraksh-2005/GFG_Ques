@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    int overlapInt(vector<vector<int>> &arr) {
+        // code here
+        int maxTime = 0;
+        for (auto &vec : arr) {
+            maxTime = max(maxTime, vec[1]);
+        }
+
+        vector<int> diffArray(maxTime + 2, 0);
+
+        for (auto &interval : arr) {
+            int startTime = interval[0];
+            int endTime   = interval[1];
+
+            diffArray[startTime]++;      
+            diffArray[endTime + 1]--;    
+        }
+
+        int active = 0, ans = 0;
+        for (int x : diffArray) {
+            active += x;
+            ans = max(ans, active);
+        }
+
+        return ans;
+    }
+};
