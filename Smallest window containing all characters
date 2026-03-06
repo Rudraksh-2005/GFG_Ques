@@ -1,0 +1,41 @@
+class Solution {
+  public:
+    string minWindow(string &s, string &p) {
+        // code here
+         vector<int> countp(256, 0), counts(256, 0);
+
+        if (p.size() > s.size())
+            return "";
+
+        
+        for (char c : p) countp[c]++;
+
+        int required = p.size(); 
+        int left = 0, right = 0, start = 0, minLen = s.size() + 1;
+
+        while (right < s.size()) {
+            if (countp[s[right]] > 0) {
+                if (counts[s[right]] < countp[s[right]])
+                    required--; 
+            }
+            counts[s[right]]++;
+
+            while (required == 0) {
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
+                    start = left;
+                }
+
+                if (countp[s[left]] > 0) {
+                    if (counts[s[left]] <= countp[s[left]])
+                        required++; 
+                }
+                counts[s[left]]--;
+                left++;
+            }
+            right++;
+        }
+
+        return (minLen == s.size() + 1) ? "" : s.substr(start, minLen);
+    }
+};
