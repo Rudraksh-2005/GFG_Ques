@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    void solve(vector<Node*>&inorder,Node* root){
+        if(root){
+            solve(inorder,root->left);
+            inorder.push_back(root);
+            solve(inorder,root->right);
+        }
+    }
+    
+    vector<Node*> findPreSuc(Node* root, int key) {
+        // code here
+        vector<Node*>inorder;
+        solve(inorder,root);
+        vector<Node*>ans;
+        Node* maxi=new Node(-1);
+        Node* mini=new Node(-1);
+        
+        
+        for(int i=0;i<inorder.size();i++){
+            if(inorder[i]->data<key)mini=inorder[i];
+        }
+        
+         for(int i=inorder.size()-1;i>=0;i--){
+            if(inorder[i]->data>key)maxi=inorder[i];
+        }
+        
+        ans.push_back(mini);
+        ans.push_back(maxi);
+        
+        
+        return ans;
+        
+    }
+};
