@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    int maxProfit(vector<int>& arr, int k) {
+        // Code here
+        int n=arr.size();
+        int ab=0,as=0,cb=0,cs=0;
+        
+        
+        for(int i=n-1;i>=0;i--){
+                
+                
+            cb=max(-arr[i]+ as, ab);
+               
+            cs=max(arr[i]-k+ ab, as);
+            
+            ab=cb;
+            as=cs;
+                
+            
+        }
+        
+        return ab;
+    }
+};
