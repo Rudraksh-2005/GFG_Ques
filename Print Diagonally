@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    vector<int> diagView(vector<vector<int>> mat) {
+        // code here
+        vector<int>ans;
+        int n=mat.size();
+       
+        
+        vector<vector<int>>p(n,vector<int>(n,0));
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(p[i][j]==0){
+                    int a=i,b=j;
+                    while(a<n && b>=0){
+                        ans.push_back(mat[a][b]);
+                        p[a][b]=1;
+                        a++;
+                        b--;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        return ans;
+    }
+};
