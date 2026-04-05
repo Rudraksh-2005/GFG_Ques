@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    int totalWays(vector<int>& arr, int target) {
+             int n = nums.size();
+
+        int totalSum = accumulate(nums.begin(), nums.end(), 0);
+
+        if ((totalSum + target) % 2 != 0 || abs(target) > totalSum) return 0;
+
+        int newTarget = (totalSum + target) / 2;
+
+        vector<vector<int>> dp(n + 1, vector<int>(newTarget + 1, 0));
+
+        for (int i = 0; i <= n; i++) dp[i][0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= newTarget; j++) {
+                dp[i][j] = dp[i - 1][j];
+
+                
+                if (nums[i - 1] <= j) {
+                    dp[i][j] += dp[i - 1][j - nums[i - 1]];
+                }
+            }
+        }
+
+        return dp[n][newTarget];
+    }
+};
