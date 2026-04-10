@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    vector<int> find3Numbers(vector<int> &arr) {
+        // Code here
+         int a=INT_MAX, b=INT_MAX, c, t;
+        
+        for(auto i:arr){
+            c = i;
+            if(c<=a)a=c;
+            else if(c<=b){
+                b=c;
+                t=a;
+            }
+            else return {t,b,c};
+        }
+        return {};
+    }
+};
