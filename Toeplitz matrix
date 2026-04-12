@@ -1,0 +1,36 @@
+class Solution {
+  public:
+  
+    bool check(int i,int j,vector<vector<int>>&mat){
+        int n=mat.size();
+        int m=mat[0].size();
+        
+        int a=i,b=j;
+        
+        while(a<n-1 && b<m-1){
+            if(mat[a][b]!=mat[a+1][b+1])return false;
+            a++,b++;
+        }
+        
+        return true;
+    }
+    bool isToeplitz(vector<vector<int>>& mat) {
+        // code here
+        int n=mat.size();
+        int m=mat[0].size();
+        
+        for(int i=0;i<n-1;i++){
+            if(check(i,0,mat)==false){
+                return false;
+            }
+        }
+        
+        for(int j=1;j<m-1;j++){
+            if(check(0,j,mat)==false){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+};
