@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    string removeSpaces(string& s) {
+        // code here
+        int n=s.length();
+        
+        string ans="";
+       
+        
+        stringstream ss(s);
+        string word;
+        
+        while(ss>> word){
+            ans+=word;
+        }
+        return ans;
+    }
+};
