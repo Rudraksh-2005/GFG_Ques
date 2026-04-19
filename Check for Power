@@ -1,0 +1,25 @@
+class Solution {
+  public:
+  
+    int power(int n,int m){
+        int res=1;
+        while(m>0){
+            if(m & 1)res=res*n;
+            n=n*n;
+            m>>=1;
+        }
+        
+        return res;
+       
+    }
+    bool isPower(int x, int y) {
+        // code here
+        
+        for(int i=0;i<100;i++){
+            if(power(x,i)==y)return true;
+        }
+        
+        return false;
+        
+    }
+};
