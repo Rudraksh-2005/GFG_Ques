@@ -1,0 +1,13 @@
+class Solution {
+  public:
+    int getSize(Node* root) {
+        // code here
+        
+        if(!root)return 0;
+        
+        int lh=getSize(root->left);
+        int rh=getSize(root->right);
+        
+        return 1+ lh+rh;
+    }
+};
