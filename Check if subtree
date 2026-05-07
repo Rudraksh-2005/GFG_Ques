@@ -1,0 +1,69 @@
+/*
+Definition for Node
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int x){
+        data = x;
+        left = right = nullptr;
+    }
+};
+*/
+
+class Solution {
+  public:
+  
+    bool check(Node *a, Node *root2){
+        queue<Node *>qu;
+        qu.push(a);
+        qu.push(root2);
+        
+        while(!qu.empty()){
+            Node *b=qu.front();
+            qu.pop();
+            Node *c=qu.front();
+            qu.pop();
+            
+            if(b->data!=c->data){
+                return false;
+            }
+            
+            if(b->left)qu.push(b->left);
+            if(c->left)qu.push(c->left);
+            
+            if(b->right)qu.push(b->right);
+            if(c->right)qu.push(c->right);
+            
+            
+        }
+        
+        return true;
+        
+    }
+    bool isSubTree(Node *root1, Node *root2) {
+        // code here
+        queue<Node *>q;
+        q.push(root1);
+        
+        while(!q.empty()){
+            Node *a=q.front();
+            q.pop();
+            
+            if(a->data==root2->data){
+                if(check(a,root2)==true){
+                    return true;
+                }
+            }
+            
+            if(a->left)q.push(a->left);
+            if(a->right)q.push(a->right);
+            
+            
+        }
+        
+        return false;
+    }
+};
