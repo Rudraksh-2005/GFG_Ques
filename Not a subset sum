@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int findSmallest(vector<int> &arr) {
+        
+       sort(arr.begin(), arr.end());
+
+        long long smallestMissing = 1;
+
+        for (int num : arr) {
+
+            if (num > smallestMissing) {
+                break;
+            }
+
+            smallestMissing += num;
+        }
+
+        return smallestMissing;
+    }
+};
