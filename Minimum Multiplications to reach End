@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    int minSteps(vector<int>& arr, int start, int end) {
+        // code here
+         if(start == end)
+            return 0;
+        
+        vector<int> dist(1000, 1e9);
+        
+        queue<int> q;
+        
+        dist[start] = 0;
+        q.push(start);
+        
+        while(!q.empty()) {
+            
+            int current = q.front();
+            q.pop();
+            
+            for(int num : arr) {
+                
+                int next = (current * num) % 1000;
+                
+                if(dist[current] + 1 < dist[next]) {
+                    
+                    dist[next] = dist[current] + 1;
+                    
+                    if(next == end)
+                        return dist[next];
+                    
+                    q.push(next);
+                }
+            }
+        }
+        
+        return -1;
+    }
+};
