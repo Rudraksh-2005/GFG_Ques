@@ -1,0 +1,25 @@
+class Solution {
+  public:
+     int toSum(Node* root){
+        if(root==NULL) return 0;
+        
+        if(root->left==NULL && root->right==NULL){
+            int val=root->data;
+            root->data=0;
+            return val;
+        }
+        
+        int leftSum = toSum(root->left);
+        int rightSum = toSum(root->right);
+        
+        int old=root->data;
+    
+        root->data=leftSum+rightSum;
+        
+        return old+root->data;
+    }
+    
+    void toSumTree(Node *root) {
+        toSum(root);
+    }
+};
