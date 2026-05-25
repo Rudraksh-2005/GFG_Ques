@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    bool checkElements(int start, int end, vector<int> &arr) {
+        // code here
+        set<int>st;
+        for(auto it:arr){
+            st.insert(it);
+        }
+        
+        for(int i=start;i<=end;i++){
+            if(st.find(i)==st.end()){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+};
