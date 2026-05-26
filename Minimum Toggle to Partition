@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    int minToggle(vector<int>& arr) {
+        // code here
+        int n=arr.size();
+        
+        int totalone=0;
+        for(auto &num:arr){
+            if(num==1)totalone++;
+        }
+        
+        
+        
+        int totalzero=n-totalone;
+        int leftone=0;
+        int leftzero=0;
+        int ans=totalzero;
+        for(int i=0;i<n;i++){
+            if(arr[i]==0)leftzero++;
+            else leftone++;
+            
+            int rightzero=totalzero-leftzero;
+            
+            ans=min(leftone+rightzero,ans);
+            
+            
+        }
+        
+        return ans;
+    }
+};
