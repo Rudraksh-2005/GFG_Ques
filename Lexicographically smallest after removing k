@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    
+    string lexicographicallySmallest(string &s, int k) {
+        // code here
+        int n=s.size();
+        
+        if((n & (n-1)) == 0)
+            k /= 2;
+        else
+            k *= 2;
+            
+            stack<char> st;
+
+    for(char ch : s){
+        while(!st.empty() && st.top() > ch && k > 0){
+            st.pop();
+            k--;
+        }
+        st.push(ch);
+    }
+
+    while(k > 0 && !st.empty()){
+        st.pop();
+        k--;
+    }
+
+    string ans;
+
+    while(!st.empty()){
+        ans += st.top();
+        st.pop();
+    }
+
+    reverse(ans.begin(), ans.end());
+    return ans==""?"-1" :ans;
+}
+};
