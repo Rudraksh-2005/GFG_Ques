@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    vector<int> constructList(vector<vector<int>> &queries) {
+        // code here
+         vector<int> result;
+        int current_xor = 0;
+        int q = queries.size(); 
+        
+        for (int i = q - 1; i >= 0; i--) {
+            if (queries[i][0] == 1) {
+                current_xor ^= queries[i][1];
+            } else {
+                result.push_back(queries[i][1] ^ current_xor);
+            }
+        }
+        
+        result.push_back(0 ^ current_xor);
+        
+        sort(result.begin(), result.end());
+        
+        return result;
+    }
+};
